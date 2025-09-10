@@ -1,8 +1,13 @@
+// ---------- EmailJS Initialization ----------
+emailjs.init('8ag-mo2H3BHnmIUMF'); // <-- replace with your PUBLIC_KEY
+
+// ---------- Navbar toggle ----------
 $('#menu').click(function () {
     $(this).toggleClass('fa-times');
-    $('.navbar').toggleClass('nav-toggle')
-}
-);
+    $('.navbar').toggleClass('nav-toggle');
+});
+
+// ---------- Scroll behavior ----------
 $(window).on('scroll load', function () {
     $('#menu').removeClass('fa-times');
     $('.navbar').removeClass('nav-toggle');
@@ -26,6 +31,7 @@ $(window).on('scroll load', function () {
     });
 });
 
+// ---------- Typed.js for home section ----------
 var typed = new Typed(".typing-text", {
     strings: ['Full-Stack Developer', 'Freelancer', 'Tech Enthusiast'],
     loop: true,
@@ -34,75 +40,40 @@ var typed = new Typed(".typing-text", {
     backDelay: 500,
 });
 
+// ---------- Contact form submission ----------
 document.getElementById('contact-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    var name = event.target.name.value;
-    var email = event.target.email.value;
-    var phone = event.target.phone.value;
-    var message = event.target.message.value;
+    event.preventDefault(); // Prevent page reload
 
-    var templateParams = {
-      name: name,
-      email: email,
-      phone: phone,
-      message: message
-    };
-
-    emailjs.send('service_3kngpgc', 'template_qkbcxxl', templateParams)
-      .then(function (response) {
-        console.log('SUCCESS!', response.status, response.text);
-        Swal.fire({
-          title: 'Success!',
-          text: 'Email sent successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      }, function (error) {
-        console.log('FAILED...', error);
-        Swal.fire({
-          title: 'Success!',
-          text: 'Email sent successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
+    emailjs.sendForm('service_6rdc6p9', 'template_dvtlq6c', this)
+      .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          Swal.fire({
+            title: 'Success!',
+            text: 'Email sent successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+          event.target.reset(); // Clear the form after sending
+      }, function(error) {
+          console.log('FAILED...', error);
+          Swal.fire({
+            title: 'Failed!',
+            text: 'Email sending failed. Please try again.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
       });
-  });
+});
 
-  document.getElementById('code-btn1').addEventListener('click', function (event) {
-    event.preventDefault(); 
-    Swal.fire({
-      title: 'Coming Soon!',
-      text: 'The code will be updated soon.',
-      icon: 'info',
-      confirmButtonText: 'OK'
+// ---------- Coming Soon buttons ----------
+['code-btn1', 'demo-btn1', 'code-btn', 'demo-btn'].forEach(function(id) {
+    document.getElementById(id).addEventListener('click', function (event) {
+        event.preventDefault(); 
+        Swal.fire({
+          title: 'Coming Soon!',
+          text: 'The code/demo will be updated soon.',
+          icon: 'info',
+          confirmButtonText: 'OK'
+        });
     });
-  });
-
-  document.getElementById('demo-btn1').addEventListener('click', function (event) {
-    event.preventDefault(); 
-    Swal.fire({
-      title: 'Coming Soon!',
-      text: 'The demo will be updated soon.',
-      icon: 'info',
-      confirmButtonText: 'OK'
-    });
-  });
-  document.getElementById('code-btn').addEventListener('click', function (event) {
-    event.preventDefault(); 
-    Swal.fire({
-      title: 'Coming Soon!',
-      text: 'The code will be updated soon.',
-      icon: 'info',
-      confirmButtonText: 'OK'
-    });
-  });
-
-  document.getElementById('demo-btn').addEventListener('click', function (event) {
-    event.preventDefault(); 
-    Swal.fire({
-      title: 'Coming Soon!',
-      text: 'The demo will be updated soon.',
-      icon: 'info',
-      confirmButtonText: 'OK'
-    });
-  });
+});
