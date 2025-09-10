@@ -1,4 +1,4 @@
-// ---------- EmailJS Initialization ----------
+// --------- EmailJS Initialization ----------
 emailjs.init('8ag-mo2H3BHnmIUMF'); // <-- replace with your PUBLIC_KEY
 
 // ---------- Navbar toggle ----------
